@@ -1,6 +1,6 @@
 ---
 title: "Hands-on Exercise 1"
-author: "Jesse Lucas"
+author: "Jesse E Lucas"
 ---
 
 # Getting Started

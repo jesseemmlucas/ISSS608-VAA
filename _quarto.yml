@@ -2,13 +2,14 @@ project:
   type: website
 
 website:
+  title: "ISSS608‑VAA"
+
   navbar:
-    title: "ISSS608‑VAA"        # ← brand text that appears on the far left
     left:
       - text: "Hands‑on Exercise"
         menu:
-          - text: "Exercise 1"
-            file: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.qmd"
+          - text: "Hands‑on Exercise 1"
+            file: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.qmd"   # ← full, exact path
     right:
       - text: Home
         href: index.qmd
@@ -19,7 +20,6 @@ format:
     theme: morph
     css: styles.css
     toc: true
-
 
 
 editor: visual
