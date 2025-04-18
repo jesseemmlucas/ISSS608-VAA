@@ -7,7 +7,7 @@ website:
     left:
       - text: "Hands‑on Exercise"
         menu:
-          - text: "Exercise 1"
+          - text: "Hands on Exercise 1"
             file: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.qmd"
     right:
       - text: Home
@@ -16,7 +16,7 @@ website:
 
 format:
   html:
-    theme: morph
+    theme: materia
     css: styles.css
     toc: true
 
