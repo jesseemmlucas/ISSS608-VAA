@@ -727,7 +727,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </section>
 <section id="working-with-stat---the-stat_summary-method" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-stat---the-stat_summary-method"><strong>1.8.2 Working with stat - the stat_summary() method</strong></h3>
-<p>The code chunk below adds mean values by using stat_summary() function and overriding the default geom.</p>
+<p>The code chunk below adds mean values by using <a href="https://ggplot2.tidyverse.org/reference/stat_summary.html"><code>stat_summary()</code></a> function and overriding the default geom.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data=</span>exam_data, </span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">y =</span> MATHS, <span class="at">x=</span> GENDER)) <span class="sc">+</span></span>
@@ -866,7 +866,12 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <section id="essential-grammatical-elements-in-ggplot2-coordinates" class="level2">
 <h2 class="anchored" data-anchor-id="essential-grammatical-elements-in-ggplot2-coordinates"><strong>1.10 Essential Grammatical Elements in ggplot2: Coordinates</strong></h2>
 <p>The <em>Coordinates</em> functions map the position of objects onto the plane of the plot. There are a number of different possible coordinate systems to use, they are:</p>
-<p>- [`coord_cartesian()`](https://ggplot2.tidyverse.org/reference/coord_cartesian.html): the default cartesian coordinate systems, where you specify x and y values (e.g.&nbsp;allows you to zoom in or out). - [`coord_flip()`](https://ggplot2.tidyverse.org/reference/coord_flip.html): a cartesian system with the x and y flipped. - [`coord_fixed()`](https://ggplot2.tidyverse.org/reference/coord_fixed.html): a cartesian system with a “fixed” aspect ratio (e.g.&nbsp;1.78 for a “widescreen” plot). - [`coord_quickmap()`](https://ggplot2.tidyverse.org/reference/coord_map.html): a coordinate system that approximates a good aspect ratio for maps.</p>
+<ul>
+<li><p><code>coord_cartesian()</code> - the default cartesian coordinate systems, where x and y values can be specified (e.g., allows zoom in or out).</p></li>
+<li><p><code>coord_flip()</code> - a cartesian system with the x and y axes flipped.</p></li>
+<li><p><code>coord_fixed()</code> - a cartesian system with a “fixed” aspect ratio (e.g., 1.78 for a widescreen” plot).</p></li>
+<li><p><code>coord_quickmap()</code> - a coordinate system that approximates a good aspect ratio for maps.</p></li>
+</ul>
 <section id="working-with-coordinate" class="level3">
 <h3 class="anchored" data-anchor-id="working-with-coordinate"><strong>1.10.1 Working with Coordinate</strong></h3>
 <p>By the default, the bar chart of ggplot2 is in vertical form.</p>
@@ -952,9 +957,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 <section id="working-with-theme" class="level3 panel-tabset">
 <h3 class="panel-tabset anchored" data-anchor-id="working-with-theme">1.11.1&nbsp;Working with theme</h3>
 <p>The default (<code>theme_gray()</code>), <code>theme_bw()</code>, <code>theme_classic()</code>, and <code>theme_minimal()</code> functions are used for the horizontal bar charts below.</p>
-<section id="theme_gray" class="level4">
-<h4 class="anchored" data-anchor-id="theme_gray"><code>theme_gray()</code></h4>
-<p>A horizontal bar chart plotted using theme_gray().</p>
+<p>A horizontal bar chart plotted using <code>theme_gray()</code>.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -971,7 +974,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 </div>
 </div>
-<p>A horizontal bar chart plotted using theme_classic(). #### <code>theme_classic()</code></p>
+<p>A horizontal bar chart plotted using theme_classic(). <code>theme_classic()</code></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -988,7 +991,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 </div>
 </div>
-<p>A horizontal bar chart plotted using theme_minimal(). #### <code>theme_minimal()</code></p>
+<p>A horizontal bar chart plotted using theme_minimal(). <code>theme_minimal()</code></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1005,7 +1008,7 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 </div>
 </div>
-<p>A horizontal bar chart plotted using theme_bw(). #### <code>theme_bw()</code></p>
+<p>A horizontal bar chart plotted using theme_bw(). <code>theme_bw()</code></p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -1022,7 +1025,6 @@ dbl (3): ENGLISH, MATHS, SCIENCE
 </div>
 </div>
 </div>
-</section>
 </section>
 </section>
 <section id="reference" class="level2">

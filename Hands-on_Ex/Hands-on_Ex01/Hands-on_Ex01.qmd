@@ -395,7 +395,7 @@ ggplot(data=exam_data,
 
 ### **1.8.2 Working with stat - the stat_summary() method**
 
-The code chunk below adds mean values by using stat_summary() function and overriding the default geom.
+The code chunk below adds mean values by using [`stat_summary()`](https://ggplot2.tidyverse.org/reference/stat_summary.html) function and overriding the default geom.
 
 ```{r}
 ggplot(data=exam_data, 
@@ -491,7 +491,13 @@ ggplot(data=exam_data,
 
 The *Coordinates* functions map the position of objects onto the plane of the plot. There are a number of different possible coordinate systems to use, they are:
 
-\- \[\`coord_cartesian()\`\](https://ggplot2.tidyverse.org/reference/coord_cartesian.html): the default cartesian coordinate systems, where you specify x and y values (e.g. allows you to zoom in or out). - \[\`coord_flip()\`\](https://ggplot2.tidyverse.org/reference/coord_flip.html): a cartesian system with the x and y flipped. - \[\`coord_fixed()\`\](https://ggplot2.tidyverse.org/reference/coord_fixed.html): a cartesian system with a "fixed" aspect ratio (e.g. 1.78 for a "widescreen" plot). - \[\`coord_quickmap()\`\](https://ggplot2.tidyverse.org/reference/coord_map.html): a coordinate system that approximates a good aspect ratio for maps.
+-   `coord_cartesian()` - the default cartesian coordinate systems, where x and y values can be specified (e.g., allows zoom in or out).
+
+-   `coord_flip()` - a cartesian system with the x and y axes flipped.
+
+-   `coord_fixed()` - a cartesian system with a “fixed” aspect ratio (e.g., 1.78 for a widescreen” plot).
+
+-   `coord_quickmap()` - a coordinate system that approximates a good aspect ratio for maps.
 
 ### **1.10.1 Working with Coordinate**
 
@@ -555,9 +561,7 @@ A list of theme can be found at this [link](https://ggplot2.tidyverse.org/refere
 
 The default (`theme_gray()`), `theme_bw()`, `theme_classic()`, and `theme_minimal()` functions are used for the horizontal bar charts below.
 
-#### `theme_gray()`
-
-A horizontal bar chart plotted using theme_gray().
+A horizontal bar chart plotted using `theme_gray()`.
 
 ```{r}
 #| code-fold: true
@@ -567,7 +571,7 @@ ggplot(exam_data, aes(x = RACE)) +
   theme_gray()
 ```
 
-A horizontal bar chart plotted using theme_classic(). \#### `theme_classic()`
+A horizontal bar chart plotted using theme_classic(). `theme_classic()`
 
 ```{r}
 #| code-fold: true
@@ -577,7 +581,7 @@ ggplot(exam_data, aes(x = RACE)) +
   theme_classic()
 ```
 
-A horizontal bar chart plotted using theme_minimal(). \#### `theme_minimal()`
+A horizontal bar chart plotted using theme_minimal(). `theme_minimal()`
 
 ```{r}
 #| code-fold: true
@@ -587,7 +591,7 @@ ggplot(exam_data, aes(x = RACE)) +
   theme_minimal()
 ```
 
-A horizontal bar chart plotted using theme_bw(). \#### `theme_bw()`
+A horizontal bar chart plotted using theme_bw(). `theme_bw()`
 
 ```{r}
 #| code-fold: true
