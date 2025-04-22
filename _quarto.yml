@@ -3,12 +3,14 @@ project:
 
 website:
   navbar:
-    title: "ISSS608‑VAA"        # ← brand text that appears on the far left
+    title: "ISSS608‑VAA"        
     left:
       - text: "Hands‑on Exercise"
         menu:
           - text: "Hands on Exercise 1"
             file: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.qmd"
+          - text: "Hands on Exercise 2"
+            file: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.qmd"
     right:
       - text: Home
         href: index.qmd

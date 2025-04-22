@@ -1,7 +1,15 @@
 ---
 title: "Hands-on Exercise 1"
-author: "Jesse Lucas"
 date: "April 18, 2025"
+date-modified: "last-modified"
+format:
+  html:
+    toc: true
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  freeze: true
 ---
 
 # 1. A Layered Grammar of Graphics: ggplot2 methods
@@ -22,9 +30,11 @@ The learning outcomes are:
 
 Before we get started, it is important for us to ensure that the required R packages have been installed. If yes, we will load the R packages. If they have yet to be installed, we will install the R packages and load them onto R environment.
 
+::: {.callout-tip icon="true"}
 #### Note:
 
 It is assumed that you already have [**pacman**](https://cran.r-project.org/web/packages/pacman/index.html) package installed. If not, please go ahead install pacman first. The code chunk below uses p_load() of pacman package to check if tidyverse packages are installed in the computer. If they are, then they will be launched into R.
+:::
 
 ```{r}
 pacman::p_load(tidyverse)
@@ -62,12 +72,12 @@ For more detail, visit [ggplot2 link](https://ggplot2.tidyverse.org/).
 
 R Graphics is the core graphical functions in Base R. A comparison is made between R Graphics and ggplot by plotting a simple histogram.
 
-### R Graphics VS ggplot {.panel-tabset}
-
+::: panel-tabset
 ### R Graphics
 
 ```{r}
 hist(exam_data$MATHS)
+
 ```
 
 ### ggplot2
@@ -80,12 +90,17 @@ ggplot(data=exam_data, aes(x = MATHS)) +
                  fill="grey") +
   ggtitle("Distribution of Maths scores")
 ```
+:::
 
-In the above example, a relatively simple code chunk is used for R Graphics, while more details are added via ggplot2.
+As you can see that the code chunk is relatively simple if R Graphics is used. Then, the question is why ggplot2 is recommended?
 
-So why use ggplot2? According to the creator of tidyverse, Hadley Wickham:
+As pointed out by [Hadley Wickham](http://varianceexplained.org/r/teach_ggplot2_to_beginners/#comment-1745406157)
 
-*“The transferable skills from ggplot2 are not the idiosyncrasies of plotting syntax, but a powerful way of thinking about visualisation, as a way of mapping between variables and the visual properties of geometric objects that you can perceive.”*
+::: {.callout-tip icon="true"}
+#### Important:
+
+The transferable skills from ggplot2 are not the idiosyncrasies of plotting syntax, but a powerful way of thinking about visualisation, as a way of mapping between variables and the visual properties of geometric objects that you can perceive.
+:::
 
 ## **1.4 Grammar of Graphics**
 
@@ -135,7 +150,8 @@ Let us call the `ggplot()` function using the code chunk below.
 ggplot(data=exam_data)
 ```
 
-**Note**
+::: {.callout-tip icon="true"}
+#### Note:
 
 -   A blank canvas appears.
 
@@ -144,6 +160,7 @@ ggplot(data=exam_data)
 -   The *data* argument defines the dataset to be used for plotting.
 
 -   If the dataset is not already a data.frame, it will be converted to one by `fortify()`.
+:::
 
 ## **1.6 Essential Grammatical Elements in ggplot2: [Aesthetic mappings](https://ggplot2.tidyverse.org/articles/ggplot2-specs.html)**
 
@@ -154,13 +171,20 @@ All aesthetics of a plot are specified in the [`aes()`](https://ggplot2.tidyvers
 Code chunk below adds the aesthetic element into the plot.
 
 ```{r}
+#| eval: false
 ggplot(data=exam_data, 
        aes(x= MATHS))
 ```
-
-**Note**
-
+::: {.callout-tip icon="true"}
+#### Note:
 -   ggplot includes the x-axis and the axis’s label.
+:::
+
+```{r}
+#| echo: false
+ggplot(data=exam_data, 
+       aes(x= MATHS))
+```
 
 ## **1.7 Essential Grammatical Elements in ggplot2: geom**
 
@@ -210,17 +234,19 @@ ggplot(data=exam_data,
   geom_dotplot(dotsize = 0.5)
 ```
 
-**Be warned**
+::: {.callout-tip icon="true"}
+#### Be warned:
+-   The y scale is not very useful, in fact it is very misleading.
+:::
 
-The y scale is not very useful, in fact it is very misleading.
-
-**Note**
-
+::: {.callout-tip icon="true"}
+#### Note:
 The code chunk below performs the following two steps:
 
 -   `scale_y_continuous()` is used to turn off the y-axis, and
 
 -   *binwidth argument* is used to change the binwidth to 2.5.
+:::
 
 ```{r}
 ggplot(data=exam_data, 
@@ -243,9 +269,10 @@ ggplot(data=exam_data,
   geom_histogram()
 ```
 
-**Note**
-
+::: {.callout-tip icon="true"}
+#### Note:
 Note that the default bin is **30**.
+:::
 
 ### **1.7.4 Modifying a geometric object by changing `geom()`**
 
@@ -277,9 +304,10 @@ ggplot(data=exam_data,
                  color="grey30")
 ```
 
-**Note**
-
+::: {.callout-tip icon="true"}
+#### Note:
 This approach can be used to colour, fill and alpha of the geometric.
+:::
 
 ### **1.7.6 Geometric Objects: geom-density()**
 
@@ -442,9 +470,10 @@ ggplot(data=exam_data,
   geom_smooth(size=0.5)
 ```
 
-**Note**
-
--   The default method used is *loess*.
+::: {.callout-tip icon="true"}
+#### Note:
+The default method used is *loess*.
+:::
 
 The default smoothing method can be overridden as shown below.
 
@@ -557,49 +586,40 @@ Built-in themes include: - `theme_gray()` (default) - `theme_bw()` - `theme_clas
 
 A list of theme can be found at this [link](https://ggplot2.tidyverse.org/reference/ggtheme.html). Each theme element can be conceived of as either a line (e.g. x-axis), a rectangle (e.g. graph background), or text (e.g. axis title).
 
-### 1.11.1 Working with theme {.panel-tabset}
+### 1.11.1 Working with theme
 
-The default (`theme_gray()`), `theme_bw()`, `theme_classic()`, and `theme_minimal()` functions are used for the horizontal bar charts below.
-
-A horizontal bar chart plotted using `theme_gray()`.
+::: panel-tabset
+### theme_gray()
 
 ```{r}
-#| code-fold: true
-ggplot(exam_data, aes(x = RACE)) +
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
   geom_bar() +
   coord_flip() +
   theme_gray()
+
 ```
 
-A horizontal bar chart plotted using theme_classic(). `theme_classic()`
+### theme_classic()
 
 ```{r}
-#| code-fold: true
-ggplot(exam_data, aes(x = RACE)) +
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
   geom_bar() +
   coord_flip() +
   theme_classic()
 ```
 
-A horizontal bar chart plotted using theme_minimal(). `theme_minimal()`
+### theme_minimal()
 
 ```{r}
-#| code-fold: true
-ggplot(exam_data, aes(x = RACE)) +
+ggplot(data=exam_data, 
+       aes(x=RACE)) +
   geom_bar() +
   coord_flip() +
   theme_minimal()
 ```
-
-A horizontal bar chart plotted using theme_bw(). `theme_bw()`
-
-```{r}
-#| code-fold: true
-ggplot(exam_data, aes(x = RACE)) +
-  geom_bar() +
-  coord_flip() +
-  theme_bw()
-```
+:::
 
 ## **1.12 Reference**
 
