@@ -12,10 +12,13 @@ website:
           - text: "Hands on Exercise 2"
             file: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.qmd"
     right:
-      - text: Home
-        href: index.qmd
-      - about.qmd
+      - href: https://isss608-ay2025.netlify.app/ #added icon to home
+        icon: house
+        
+      - href: https://github.com/jesseemmlucas/ISSS608-VAA #add github link
+        icon: github
 
+ 
 format:
   html:
     theme: materia
