@@ -8,7 +8,7 @@ format:
 execute: 
   echo: true
   eval: true
-  warning: false
+  #warning: false
   freeze: true
 ---
 
@@ -43,7 +43,7 @@ In this exercise, beside tidyverse, four R packages will be used. They are:
 ```{r}
 pacman::p_load(ggrepel, patchwork, 
                ggthemes, hrbrthemes,
-               tidyverse) 
+               tidyverse,extrafont) 
 ```
 
 ### 2.2.2 Importing data
@@ -453,6 +453,8 @@ We can plot more complex composite by using appropriate operators. For example, 
 
 ```{r}
 #| echo: false
+#| fig-width: 13 
+#| fig-height: 8
 (p1 / p2) | p3
 
 ```
@@ -528,6 +530,8 @@ Figure below is created by combining patchwork and theme_economist() of ggthemes
 
 ```{r}
 #| echo: false
+#| fig-width: 13 
+#| fig-height: 8
 patchwork <- (p1 / p2) | p3
 patchwork & theme_economist()
 
