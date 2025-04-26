@@ -15,8 +15,8 @@ website:
       - href: https://isss608-ay2025.netlify.app/ #added icon to home
         icon: house
         
-      - href: https://github.com/jesseemmlucas/ISSS608-VAA #add github link
-        icon: github
+      #- href: https://github.com/jesseemmlucas/ISSS608-VAA #add github link
+        #icon: github
 
  
 format:
