@@ -1,5 +1,5 @@
 ---
-title: "Hands-on Exercise 2"
+title: "Hands-on Exercise 2: Beyond ggplot2 Fundamentals"
 date: "April 22, 2025"
 date-modified: "last-modified"
 format:
@@ -12,8 +12,6 @@ execute:
   message: false
   freeze: true
 ---
-
-# 2. Beyond ggplot2 Fundamentals
 
 ## **2.1 Overview**
 

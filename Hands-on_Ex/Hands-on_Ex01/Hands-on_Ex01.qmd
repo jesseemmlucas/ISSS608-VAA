@@ -1,5 +1,5 @@
 ---
-title: "Hands-on Exercise 1"
+title: "Hands-on Exercise 1: A Layered Grammar of Graphics: ggplot2 methods"
 date: "April 18, 2025"
 date-modified: "last-modified"
 format:
@@ -11,8 +11,6 @@ execute:
   warning: false
   freeze: true
 ---
-
-# 1. A Layered Grammar of Graphics: ggplot2 methods
 
 ## **1.1 Learning Outcome**
 
