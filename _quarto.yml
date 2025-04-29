@@ -8,9 +8,20 @@ website:
       - text: "Hands‑on Exercise"
         menu:
           - text: "Hands on Exercise 1"
-            file: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.qmd"
+            file: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
           - text: "Hands on Exercise 2"
-            file: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.qmd"
+            file: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html"
+          - text: "Hands on Exercise 3A"
+            file: "Hands-on_Ex/Hands-on_Ex03A/Hands-on_Ex03A.html"
+          - text: "Hands on Exercise 3B"
+            file: "Hands-on_Ex/Hands-on_Ex03B/Hands-on_Ex03B.html"
+      - text: "Take-Home Exercise"
+        menu:
+        - text: "Coming Soon" #Update
+      - text: "In-Class Exercise"
+        menu:
+        - text: "Coming Soon" #Update
+      
     right:
       - href: https://isss608-ay2025.netlify.app/ #added icon to home
         icon: house
