@@ -2,41 +2,63 @@ project:
   type: website
 
 website:
+
+  # ——— top navbar ———
   navbar:
-    title: "ISSS608‑VAA"        
+    title: "ISSS608-VAA"
     left:
-      - text: "Hands‑on Exercise"
+      - text: "Hands-on Exercise"
         menu:
           - text: "Hands on Exercise 1"
-            file: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
+            href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
           - text: "Hands on Exercise 2"
-            file: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html"
+            href: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html"
           - text: "Hands on Exercise 3A"
-            file: "Hands-on_Ex/Hands-on_Ex03A/Hands-on_Ex03A.html"
+            href: "Hands-on_Ex/Hands-on_Ex03A/Hands-on_Ex03A.html"
           - text: "Hands on Exercise 3B"
-            file: "Hands-on_Ex/Hands-on_Ex03B/Hands-on_Ex03B.html"
+            href: "Hands-on_Ex/Hands-on_Ex03B/Hands-on_Ex03B.html"
+            
       - text: "Take-Home Exercise"
         menu:
-        - text: "Coming Soon" #Update
+          - text: "Take-Home Exercise 1"
+            href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html"
+          
       - text: "In-Class Exercise"
         menu:
-        - text: "Coming Soon" #Update
-      
+          - text: "Coming Soon"   # Update
+          
     right:
-      - href: https://isss608-ay2025.netlify.app/ #added icon to home
+      - href: https://isss608-ay2025.netlify.app/
         icon: house
-        
-      #- href: https://github.com/jesseemmlucas/ISSS608-VAA #add github link
-        #icon: github
+      # - href: https://github.com/jesseemmlucas/ISSS608-VAA
+      #   icon: github
 
- 
+
+  sidebar: 
+    style: floating
+    contents:
+        - section: "Hands-on Exercise"
+        - text: "Hands-on Exercise 1"
+          href: "Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html"
+        - text: "Hands-on Exercise 2"
+          href: "Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html"
+        - text: "Hands-on Exercise 3A"
+          href: "Hands-on_Ex/Hands-on_Ex03A/Hands-on_Ex03A.html"
+        - text: "Hands-on Exercise 3B"
+          href: "Hands-on_Ex/Hands-on_Ex03B/Hands-on_Ex03B.html"
+          
+        - section: "Take-Home Exercise"
+        - text: "Take-Home Exercise 1"
+          href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html"
+        
+        - section: "In-Class Exercise"
+        - text: "In-Class Exercise 2"
+
+
 format:
   html:
     theme: materia
     css: styles.css
     toc: true
 
-
-
 editor: visual
-

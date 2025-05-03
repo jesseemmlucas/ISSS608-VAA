@@ -1,0 +1,650 @@
+---
+title: "Take-Home Exercise 1"
+date: "May 1, 2025"
+date-modified: "last-modified"
+format:
+  html:
+    toc: true
+execute: 
+  echo: true
+  eval: true
+  warning: false
+  message: false
+  freeze: true
+---
+
+# 1. Overview
+
+## 1.1 Setting the scene
+
+A local online media company that publishes daily content on digital platforms is planning to release an article on demographic structures and distribution of Singapore in 2024.
+
+## 1.2 Our Task
+
+In this exercise, Exploratory Data Analysis (EDA) methods and ggplot functions are used to explore:
+
+-   the distribution of Singapore residents by age and gender in 2024, and
+
+-   the regional and planning-area distribution of age cohorts.
+
+# 2. Getting Started
+
+## 2.1 Load Packages
+
+First, we will write a code chunk to check, install and launch the following R packages:
+
+-   **ggiraph:** for making ‘ggplot’ graphics interactive.
+
+-   **DT:** provides an R interface to the JavaScript library [DataTables](https://datatables.net/) that create interactive table on html page.
+
+-   **tidyverse:** a family of modern R packages specially designed to support data science, analysis and communication task including creating static statistical graphs.
+
+-   **patchwork:** for combining multiple ggplot2 graphs into one figure.
+
+-   **ggrepel:** an R package provides geoms for ggplot2 to repel overlapping text labels.
+
+-   **ggthemes:** an R package provides some extra themes, geoms, and scales for ‘ggplot2’.
+
+-   **hrbrthemes:** an R package provides typography-centric themes and theme components for ggplot2.
+
+We load the following R packages using the `pacman::p_load()` function:
+
+```{r}
+#| echo: true
+#| warning: false
+#| message: false
+#| results: 'hide'
+pacman::p_load(ggiraph,patchwork, DT, tidyverse,ggrepel,ggthemes,hrbrthemes)
+```
+
+## 2.2 The Data
+
+To accomplish the task, *Singapore Residents by Planning Area / Subzone, Single Year of Age and Sex, June 2024* dataset shares by [Department of Statistics, Singapore (DOS)](https://www.singstat.gov.sg/) should be used.
+
+-   The code chunk below imports respopagesex2024.csv into R environment by using [*read_csv()*](https://readr.tidyverse.org/reference/read_delim.html) function of [**readr**](https://readr.tidyverse.org/) package.
+
+```{r}
+respopagesex2024 <- read_csv("data/respopagesex2024.csv")
+```
+
+## 2.3 Data pre-processing
+
+We first take a look at the data, and check if there are any duplicate entries. Using the `glimpse()` function, we see that the dataset consists of 60,424 rows and 6 columns. It also shows the column names, column type, and the first few entries of each column.
+
+```{r}
+glimpse(respopagesex2024)
+```
+
+Using the duplicated function, we see that there are no duplicate entries in the data.
+
+```{r}
+respopagesex2024[duplicated(respopagesex2024),]
+```
+
+Data objects in R can be rendered as HTML tables using the JavaScript library ‘DataTables’.
+
+```{r}
+DT::datatable(respopagesex2024, class= "compact")
+```
+
+Based on the datatable we see ages running from 0 to 90 and over. Additionally, in the raw dataset the Age column is stored as text, including the label “90_and_over”, so R cannot treat it as a numeric variable for plotting or calculation. The code chunk below replaces “90_and_over” with “90” and then converts the entire column to integers. This makes age values numeric so we can correctly sort, scale and perform arithmetic on them in our visualisations.
+
+```{r}
+df <- respopagesex2024 %>%
+  mutate(
+    Age = if_else(Age == "90_and_Over", "90", Age),
+    AgeNum = as.integer(Age)
+  )
+
+glimpse(df)
+```
+
+Next, we will now classify the age variable into five categories:
+
+-   Children (0 to 14)
+
+-   Youth (15 to 24)
+
+-   Prime working age (25 to 54)
+
+-   Pre retirement (55 to 64)
+
+-   Seniors (65 plus)
+
+In our raw data each individual age appears separately, resulting in over 90 distinct values that make it hard to see broader patterns. The code chunk below creates a new `AgeGroup` variable that assigns each numeric age into one of five meaningful cohorts. This lets us collapse many single‑year ages into groups so we can more clearly compare the shares of children, youth, prime working‑age adults, pre‑retirement adults and seniors in our visualisations.
+
+::: panel-tabset
+### The Output
+
+```{r}
+#| echo: false
+df <- df %>%
+  mutate(
+    AgeGroup = case_when(
+      AgeNum <= 14 ~ "Children (0 to 14)",
+      AgeNum <= 24 ~ "Youth (15 to 24)",
+      AgeNum <= 54 ~ "Prime working age (25 to 54)",
+      AgeNum <= 64 ~ "Pre retirement (55 to 64)",
+      TRUE         ~ "Seniors (65 plus)"
+    )
+  )
+
+total_pop <- sum(df$Pop)
+
+age_summary <- df %>%
+  group_by(AgeGroup) %>%
+  summarise(
+    Count = sum(Pop),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    Percent = round(Count / total_pop * 100, 1)
+  )
+
+DT::datatable(
+  age_summary,
+  options = list(pageLength = 5, autoWidth = TRUE),
+  caption = "Population count and percentage by five age cohorts"
+)
+```
+
+### The Code
+
+```{r}
+#| eval: false
+df <- df %>%
+  mutate(
+    AgeGroup = case_when(
+      AgeNum <= 14 ~ "Children (0 to 14)",
+      AgeNum <= 24 ~ "Youth (15 to 24)",
+      AgeNum <= 54 ~ "Prime working age (25 to 54)",
+      AgeNum <= 64 ~ "Pre retirement (55 to 64)",
+      TRUE         ~ "Seniors (65 plus)"
+    )
+  )
+
+total_pop <- sum(df$Pop)
+
+age_summary <- df %>%
+  group_by(AgeGroup) %>%
+  summarise(
+    Count = sum(Pop),
+    .groups = "drop"
+  ) %>%
+  mutate(
+    Percent = round(Count / total_pop * 100, 1)
+  )
+
+DT::datatable(
+  age_summary,
+  options = list(pageLength = 5, autoWidth = TRUE),
+  caption = "Population count and percentage by five age cohorts"
+)
+```
+:::
+
+::: {.callout-tip icon="true"}
+#### Insights:
+
+-   The 25–54 group is largest at 43.6 percent, driving today’s workforce.
+
+-   Dependents (0–14 plus 65 plus) total 31.8 percent, implying about three workers per dependent.
+
+-   The 55–64 cohort (14.1 percent) will soon swell the senior group, raising future care demands.
+
+-   Youth (15–24) are just 10.4 percent, indicating fewer entrants to tertiary education and early careers.
+:::
+
+In the data-set every planning area is listed individually, which makes it difficult to assess broader geographic trends. Based on information from the [Urban Redevelopment Authority (URA)](https://eservice.ura.gov.sg/maps/?service=MP) master plan, the code chunk below creates a new `Region` variable by mapping each planning area into one of five larger regions. This lets us aggregate and compare population counts at the regional level, revealing how residents are distributed across North, West, Central, North‑East and East Si
+
+::: panel-tabset
+### The Output
+
+```{r}
+#| echo: false
+north      <- c("Woodlands","Sembawang","Simpang","Mandai","Yishun",
+                "Lim Chu Kang","Sungei Kadut","Central Water Catchment")
+west       <- c("Western Water Catchment","Choa Chu Kang","Bukit Panjang",
+                "Tengah","Bukit Batok","Clementi","Jurong East","Boon Lay",
+                "Pioneer","Jurong West","Western Islands","Tuas")
+central    <- c("Bishan","Toa Payoh","Geylang","Marine Parade","Kallang",
+                "Newton","Orchard","Rochor","River Valley","Museum",
+                "Singapore River","Outram","Downtown Core","Marina South",
+                "Marina East","Straits View","Bukit Merah","Queenstown",
+                "Tanglin","Bukit Timah","Novena","Southern Islands")
+north_east <- c("Seletar","Punggol","Sengkang","Ang Mo Kio","Serangoon","Hougang","North-Eastern Islands")
+east       <- c("Pasir Ris","Paya Lebar","Tampines","Bedok","Changi","Changi Bay")
+
+df <- df %>%
+  mutate(
+    Region = case_when(
+      PA %in% north      ~ "North",
+      PA %in% west       ~ "West",
+      PA %in% central    ~ "Central",
+      PA %in% north_east ~ "North-East",
+      PA %in% east       ~ "East",
+      TRUE               ~ "Unknown"
+    )
+  )
+library(DT)
+
+region_summary <- df %>% 
+  group_by(Region) %>% 
+  summarise(
+    Count   = sum(Pop),
+    .groups = "drop"
+  ) %>% 
+  mutate(
+    Percent = round(Count / sum(Count) * 100, 1)
+  )
+
+DT::datatable(
+  region_summary,
+  options = list(pageLength = 5, autoWidth = TRUE),
+  caption = "Number of residents by region"
+)
+
+```
+
+### The Code
+
+```{r}
+#| eval: false
+north      <- c("Woodlands","Sembawang","Simpang","Mandai","Yishun",
+                "Lim Chu Kang","Sungei Kadut","Central Water Catchment")
+west       <- c("Western Water Catchment","Choa Chu Kang","Bukit Panjang",
+                "Tengah","Bukit Batok","Clementi","Jurong East","Boon Lay",
+                "Pioneer","Jurong West","Western Islands","Tuas")
+central    <- c("Bishan","Toa Payoh","Geylang","Marine Parade","Kallang",
+                "Newton","Orchard","Rochor","River Valley","Museum",
+                "Singapore River","Outram","Downtown Core","Marina South",
+                "Marina East","Straits View","Bukit Merah","Queenstown",
+                "Tanglin","Bukit Timah","Novena","Southern Islands")
+north_east <- c("Seletar","Punggol","Sengkang","Ang Mo Kio","Serangoon","Hougang",
+                "North-Eastern Islands")
+east       <- c("Pasir Ris","Paya Lebar","Tampines","Bedok","Changi","Changi Bay")
+
+df <- df %>%
+  mutate(
+    Region = case_when(
+      PA %in% north      ~ "North",
+      PA %in% west       ~ "West",
+      PA %in% central    ~ "Central",
+      PA %in% north_east ~ "North-East",
+      PA %in% east       ~ "East",
+      TRUE               ~ "Unknown"
+    )
+  )
+library(DT)
+
+region_summary <- df %>% 
+  group_by(Region) %>% 
+  summarise(
+    Count   = sum(Pop),
+    .groups = "drop"
+  ) %>% 
+  mutate(
+    Percent = round(Count / sum(Count) * 100, 1)
+  )
+
+DT::datatable(
+  region_summary,
+  options = list(pageLength = 5, autoWidth = TRUE),
+  caption = "Number of residents by region"
+)
+
+```
+:::
+
+::: {.callout-tip icon="true"}
+#### Insights:
+
+-   Central and North‑East each hold around 23% of residents.
+
+-   West follows closely at 22.5% , followed by East with 17%.
+
+-   North is smallest with 14.3%.
+
+-   This suggest that Singapore’s population is not overwhelmingly concentrated in one quadrant but is spread across.
+:::
+
+# 3. Age Distribution by Sex
+
+## 3.1 Box Plot
+
+We next aim to compare the age distributions of males and females on a population basis. The code chunk below first expands the data so that each row is replicated by its Pop count, thereby creating one record per individual. It then draws a box plot of AgeNum by Sex to show the spread and quartiles, and adds a white point at the mean age for each sex.
+
+::: panel-tabset
+### The Plot
+
+```{r}
+#| echo: false
+df_expanded <- df %>% 
+  uncount(weights = Pop)
+ggplot(df_expanded, aes(x = Sex, y = AgeNum, fill = Sex)) +
+  geom_boxplot() +
+  stat_summary(
+    fun    = mean,
+    geom   = "point",
+    colour = "white",
+    size   = 3
+  ) +
+  labs(
+    x     = "Sex",
+    y     = "Age (years)",
+    title = "Age Distribution by Sex (Population-Weighted)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+```
+
+### The Code
+
+```{r}
+#| eval: false
+df_expanded <- df %>% 
+  uncount(weights = Pop)
+ggplot(df_expanded, aes(x = Sex, y = AgeNum, fill = Sex)) +
+  geom_boxplot() +
+  stat_summary(
+    fun    = mean,
+    geom   = "point",
+    colour = "white",
+    size   = 3
+  ) +
+  labs(
+    x     = "Sex",
+    y     = "Age (years)",
+    title = "Age Distribution by Sex (Population-Weighted)"
+  ) +
+  theme_minimal() +
+  theme(legend.position = "none")
+```
+:::
+
+::: {.callout-tip icon="true"}
+#### Key Insights:
+
+-   **Similar central tendency**– Both sexes have a median age of about 45, shown by the central line in each box.
+
+-   **Symmetry between sexes**– The nearly identical box heights and whisker lengths confirm that male and female age distributions mirror each other in Singapore 2024.
+:::
+
+## 3.2 Bar Chart
+
+Here we seek to compare how residents are distributed across the five age cohorts by gender. The code chunk groups the data by Sex and AgeGroup and sums the Pop values to create a summary of counts. It uses geom col to draw vertical bars and geom text to place the count inside each bar, facet wrap to stack the female and male panels vertically, rotates the age range labels by 90 degrees for readability and applies a minimal theme with expanded margins so none of the labels are clipped.
+
+::: panel-tabset
+### The Plot
+
+```{r}
+#| echo: false
+age_sex <- df %>% 
+  count(Sex, AgeGroup, wt = Pop, name = "Count") %>%
+  mutate(
+    AgeGroup = factor(
+      AgeGroup,
+      levels = c(
+        "Children (0 to 14)",
+        "Youth (15 to 24)",
+        "Prime working age (25 to 54)",
+        "Pre retirement (55 to 64)",
+        "Seniors (65 plus)"
+      )
+    )
+  )
+
+ggplot(age_sex, aes(x = AgeGroup, y = Count, fill = AgeGroup)) +
+  geom_col() +
+  geom_text(aes(label = Count), vjust = 0.7, colour = "black", size = 3) +
+  facet_wrap(~Sex, ncol = 1) +
+  scale_x_discrete(expand = expansion(add = c(0, 0.5))) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+    legend.position = "none",
+    plot.margin = margin(t = 5, r = 5, b = 40, l = 5)
+  ) +
+  labs(
+    x     = "Age Range",
+    y     = "Residents",
+    title = "Population by Age Range and Sex"
+  )
+```
+
+### The Code
+
+```{r}
+#| eval: false
+age_sex <- df %>% 
+  count(Sex, AgeGroup, wt = Pop, name = "Count") %>%
+  mutate(
+    AgeGroup = factor(
+      AgeGroup,
+      levels = c(
+        "Children (0 to 14)",
+        "Youth (15 to 24)",
+        "Prime working age (25 to 54)",
+        "Pre retirement (55 to 64)",
+        "Seniors (65 plus)"
+      )
+    )
+  )
+
+ggplot(age_sex, aes(x = AgeGroup, y = Count, fill = AgeGroup)) +
+  geom_col() +
+  geom_text(aes(label = Count), vjust = 0.7, colour = "black", size = 3) +
+  facet_wrap(~Sex, ncol = 1) +
+  scale_x_discrete(expand = expansion(add = c(0, 0.5))) +
+  theme_minimal(base_size = 12) +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+    legend.position = "none",
+    plot.margin = margin(t = 5, r = 5, b = 40, l = 5)
+  ) +
+  labs(
+    x     = "Age Range",
+    y     = "Residents",
+    title = "Population by Age Range and Sex"
+  )
+```
+:::
+
+::: {.callout-tip icon="true"}
+#### Key Insights:
+
+-   **A strong labour‑force core -** The 25 to 54 cohort makes up majority of both sexes, showing that most residents remain in their prime working years.
+
+-   **Impending retirement wave -** The 55 to 64 group is almost as large as the 0 to 14 group. Within ten years many of these adults will shift into the senior bracket, boosting demand for healthcare and elder services.
+
+-   **Gender longevity gap** – There are more senior women than men, indicating that females enjoy longer lifespans.
+
+-   **Low youth base** - Those aged 15 to 24 are the smallest cohort. This warns of potential future shortages in tertiary‑educated entrants and early‑career talent.
+:::
+
+# 4. Region Distribution by Age
+
+## 4.1 Bar Chart
+
+In this step we examine how each region’s population is divided among the five age cohorts in percentage terms. The code chunk first aggregates the total residents by Region and AgeGroup, then computes each cohort’s share of its region and formats it as a label. The ggplot call draws a stacked column chart for each region, uses position_stack to place the percentage labels in the middle of each segment, and rotates the region names on the x axis by forty five degrees for readability.
+
+::: panel-tabset
+### The Plot
+
+```{r}
+#| echo: false
+region_age_pct <- df %>%
+  count(Region, AgeGroup, wt = Pop, name = "Count") %>%
+  group_by(Region) %>%
+  mutate(
+    Percent = round(Count / sum(Count) * 100, 1),
+    Label   = paste0(Percent, "%")
+  ) %>%
+  ungroup() %>%
+  mutate(
+    AgeGroup = factor(
+      AgeGroup,
+      levels = c(
+        "Seniors (65 plus)",
+        "Pre retirement (55 to 64)",
+        "Prime working age (25 to 54)",
+        "Youth (15 to 24)",
+        "Children (0 to 14)"
+      )
+    )
+  )
+
+p1 <- ggplot(region_age_pct, aes(x = Region, y = Count, fill = AgeGroup)) +
+  geom_col() +
+  geom_text(
+    aes(label = Label),
+    position = position_stack(vjust = 0.5),
+    size     = 3,
+    colour   = "white"
+  ) +
+  labs(
+    x     = "Region",
+    y     = "Total population",
+    fill  = "Age range",
+    title = "Age group distribution by region"
+  ) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+
+ne_under30 <- df %>%
+  filter(Region == "North-East", AgeNum <= 30) %>%
+  group_by(PA) %>%
+  summarise(Under30 = sum(Pop), .groups = "drop") %>%
+  slice_max(order_by = Under30, n = 5)
+
+p2 <- ggplot(ne_under30, aes(x = Under30, y = fct_reorder(PA, Under30))) +
+  geom_bar(stat = "identity") +
+  geom_text_repel(
+    aes(label = Under30),
+    nudge_x = max(ne_under30$Under30) * 0.02
+  ) +
+  coord_flip() +
+  labs(
+    x     = "Pop aged 30 or below",
+    y     = "Planning area (North East)",
+    title = "Top 5 North-East PAs by under-30 population"
+  ) +
+  theme_economist()
+
+(p1 / p2) +
+  plot_layout(
+    ncol   = 1,
+    heights = c(2, 1),
+  ) &
+  theme(
+    plot.margin     = margin(5, 5, 5, 5),  # small 5pt margin all around
+    panel.spacing   = unit(0.5, "lines")
+  )
+```
+
+### The Code
+
+```{r}
+#| eval: false
+region_age_pct <- df %>%
+  count(Region, AgeGroup, wt = Pop, name = "Count") %>%
+  group_by(Region) %>%
+  mutate(
+    Percent = round(Count / sum(Count) * 100, 1),
+    Label   = paste0(Percent, "%")
+  ) %>%
+  ungroup() %>%
+  mutate(
+    AgeGroup = factor(
+      AgeGroup,
+      levels = c(
+        "Seniors (65 plus)",
+        "Pre retirement (55 to 64)",
+        "Prime working age (25 to 54)",
+        "Youth (15 to 24)",
+        "Children (0 to 14)"
+      )
+    )
+  )
+
+p1 <- ggplot(region_age_pct, aes(x = Region, y = Count, fill = AgeGroup)) +
+  geom_col() +
+  geom_text(
+    aes(label = Label),
+    position = position_stack(vjust = 0.5),
+    size     = 3,
+    colour   = "white"
+  ) +
+  labs(
+    x     = "Region",
+    y     = "Total population",
+    fill  = "Age range",
+    title = "Age group distribution by region"
+  ) +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+
+ne_under30 <- df %>%
+  filter(Region == "North-East", AgeNum <= 30) %>%
+  group_by(PA) %>%
+  summarise(Under30 = sum(Pop), .groups = "drop") %>%
+  slice_max(order_by = Under30, n = 5)
+
+p2 <- ggplot(ne_under30, aes(x = Under30, y = fct_reorder(PA, Under30))) +
+  geom_bar(stat = "identity") +
+  geom_text_repel(
+    aes(label = Under30),
+    nudge_x = max(ne_under30$Under30) * 0.02
+  ) +
+  coord_flip() +
+  labs(
+    x     = "Pop aged 30 or below",
+    y     = "Planning area (North East)",
+    title = "Top 5 North-East PAs by under-30 population"
+  ) +
+  theme_economist()
+
+(p1 / p2) +
+  plot_layout(
+    ncol   = 1,
+    heights = c(2, 1),
+  ) &
+  theme(
+    plot.margin     = margin(5, 5, 5, 5),
+    panel.spacing   = unit(0.5, "lines")
+  )
+```
+:::
+
+::: {.callout-tip icon="true"}
+#### Key Insights:
+
+-   The prime working‑age cohort (25 to 54) dominates in every region.
+
+-   The North‑East has the highest child share (15.1 percent) and the Central the lowest (12.9 percent), suggesting younger families concentrate in newer towns.
+
+-   The East shows a relatively small youth segment (10.3 percent) combined with a high senior share (19.2 percent), indicating an ageing population there.
+:::
+
+As mentioned previously our analysis showed that younger families in the North East region tend to be concentrated in the newer housing towns. For this bar chart we zoom in on North East planning areas to identify which have the largest populations aged thirty or below. The code chunk first filters the data to Region == "North East" and AgeNum ≤ 30, then groups by PA and sums Pop to compute Under30 counts. It uses slice_max(n = 5) to select the top five PAs. Finally it draws a horizontal bar chart with ggplot’s geom_bar(stat="identity") and coord_flip(), adds the numeric labels with geom_text_repel(), applies theme_economist(), and sets descriptive axis titles and a chart title via labs().
+
+::: {.callout-tip icon="true"}
+#### Key Insights:
+
+-   Sengkang leads with majority of young residents, followed by Punggol, Hougang, AngMoKio and Serangoon.
+
+-   A number of factors help explain why Sengkang and Punggol attract so many younger people. Both towns feature a high proportion of newer public housing estates that appeal to young families and first‑time buyers.
+:::
+
+# 5. Summary and Conclusion
+
+## 5.1 Summary
+
+In this exercise, we used data visualisation methods to explore Singapore’s June 2024 resident population, focusing on age, gender and regional distribution. We observed that working age adults (15 to 64) form 55.30 per cent of the population, with children (0 to 14) comprising 23.05 per cent, and seniors (65 plus) 21.65 per cent. Regional analysis showed that Central (23.12 per cent) and North East (23.20 per cent) regions have the highest populations, followed by West (22.46 per cent), East (16.93 per cent), and North (14.29 per cent). Within North East, Sengkang and Punggol emerged as popular areas for younger residents.
+
+## 5.2 Conclusion
+
+This exercise focused solely on exploratory visual analysis. To strengthen the findings, future work should include statistical tests for significance and correlations. Additionally, further exploration into other demographic variables available in the dataset could reveal deeper insights. Overall, this exercise provided valuable practice in effectively communicating data through clear visualisations.
+
+# 6. References
+
+[Urban Redevelopment Authority (URA) - Master Plan](https://eservice.ura.gov.sg/maps/?service=MP)

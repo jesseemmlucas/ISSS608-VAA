@@ -1,1 +1,7 @@
 /* css styles */
+/* give the top-level sidebar section header a background */
+.sidebar-item-text.sidebar-link.text-start {
+  background-color: #19a7f7;
+  color: white; 
+  font-weight: 700;  
+}
