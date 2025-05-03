@@ -625,7 +625,7 @@ p2 <- ggplot(ne_under30, aes(x = Under30, y = fct_reorder(PA, Under30))) +
 -   The East shows a relatively small youth segment (10.3 percent) combined with a high senior share (19.2 percent), indicating an ageing population there.
 :::
 
-As mentioned previously our analysis showed that younger families in the North East region tend to be concentrated in the newer housing towns. For this bar chart we zoom in on North East planning areas to identify which have the largest populations aged thirty or below. The code chunk first filters the data to Region == "North East" and AgeNum ≤ 30, then groups by PA and sums Pop to compute Under30 counts. It uses slice_max(n = 5) to select the top five PAs. Finally it draws a horizontal bar chart with ggplot’s geom_bar(stat="identity") and coord_flip(), adds the numeric labels with geom_text_repel(), applies theme_economist(), and sets descriptive axis titles and a chart title via labs().
+As mentioned previously, our analysis showed that the North-East region has the highest child share, suggesting younger families are concentrated there. For this bar chart we zoom in on North East planning areas to identify which have the largest populations aged thirty or below. The code chunk first filters the data to Region == "North East" and AgeNum ≤ 30, then groups by PA and sums Pop to compute Under30 counts. It uses slice_max(n = 5) to select the top five PAs. Finally it draws a horizontal bar chart with ggplot’s geom_bar(stat="identity") and coord_flip(), adds the numeric labels with geom_text_repel(), applies theme_economist(), and sets descriptive axis titles and a chart t
 
 ::: {.callout-tip icon="true"}
 #### Key Insights:
