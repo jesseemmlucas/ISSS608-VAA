@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.26">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="dcterms.date" content="2025-05-08">
+
+<title>Take-Home Exercise 1: Part 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-53f539a478d6ecd1be31ce9fd30fd81c.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-718792cf89c2932a3ff73bcf5333a67a.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<link href="../../site_libs/htmltools-fill-0.5.8.1/fill.css" rel="stylesheet">
+
+<script src="../../site_libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+
+<script src="../../site_libs/d3-bundle-5.16.0/d3-bundle.min.js"></script>
+
+<script src="../../site_libs/d3-lasso-0.0.5/d3-lasso.min.js"></script>
+
+<script src="../../site_libs/save-svg-as-png-1.4.17/save-svg-as-png.min.js"></script>
+
+<script src="../../site_libs/flatbush-4.4.0/flatbush.min.js"></script>
+
+<link href="../../site_libs/ggiraphjs-0.8.10/ggiraphjs.min.css" rel="stylesheet">
+
+<script src="../../site_libs/ggiraphjs-0.8.10/ggiraphjs.min.js"></script>
+
+<script src="../../site_libs/girafe-binding-0.8.13/girafe.js"></script>
+
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-sidebar floating nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">ISSS608-VAA</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-hands-on-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Hands-on Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-hands-on-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html">
+ <span class="dropdown-text">Hands on Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html">
+ <span class="dropdown-text">Hands on Exercise 2</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03A/Hands-on_Ex03A.html">
+ <span class="dropdown-text">Hands on Exercise 3A</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex03B/Hands-on_Ex03B.html">
+ <span class="dropdown-text">Hands on Exercise 3B</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04A.html">
+ <span class="dropdown-text">Hands on Exercise 4A</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04B.html">
+ <span class="dropdown-text">Hands on Exercise 4B</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04C.html">
+ <span class="dropdown-text">Hands on Exercise 4C</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04D.html">
+ <span class="dropdown-text">Hands on Exercise 4D</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-take-home-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Take-Home Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-take-home-exercise">    
+        <li>
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html">
+ <span class="dropdown-text">Take-Home Exercise 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01B.html">
+ <span class="dropdown-text">Take-Home Exercise 1 Part 2</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-in-class-exercise" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">In-Class Exercise</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-in-class-exercise">    
+        <li class="dropdown-header">Coming Soon</li>
+    </ul>
+  </li>
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://isss608-ay2025.netlify.app/"> <i class="bi bi-house" role="img">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01B.html">Take-Home Exercise 1 Part 2</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Hands-on Exercise</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex01/Hands-on_Ex01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands-on Exercise 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex02/Hands-on_Ex02.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands-on Exercise 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex03A/Hands-on_Ex03A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands-on Exercise 3A</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex03B/Hands-on_Ex03B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands-on Exercise 3B</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04A.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands on Exercise 4A</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04B.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands on Exercise 4B</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04C.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands on Exercise 4C</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Hands-on_Ex/Hands-on_Ex04/Hands-on_Ex04D.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Hands on Exercise 4D</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">Take-Home Exercise</span></span>
+  </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Take-Home Exercise 1</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01B.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Take-Home Exercise 1 Part 2</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <span class="sidebar-item-text sidebar-link text-start">
+ <span class="menu-text">In-Class Exercise</span></span>
+  </li>
+        <li class="sidebar-item">
+ <span class="menu-text">In-Class Exercise 2</span>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#peer-review" id="toc-peer-review" class="nav-link active" data-scroll-target="#peer-review">Peer Review</a>
+  <ul class="collapse">
+  <li><a href="#original-visualization" id="toc-original-visualization" class="nav-link" data-scroll-target="#original-visualization">Original Visualization</a>
+  <ul class="collapse">
+  <li><a href="#quadrant" id="toc-quadrant" class="nav-link" data-scroll-target="#quadrant">Quadrant</a></li>
+  <li><a href="#good-points" id="toc-good-points" class="nav-link" data-scroll-target="#good-points">Good Points</a></li>
+  <li><a href="#critiques" id="toc-critiques" class="nav-link" data-scroll-target="#critiques"><strong>Critiques</strong></a></li>
+  </ul></li>
+  <li><a href="#refined-visualization" id="toc-refined-visualization" class="nav-link" data-scroll-target="#refined-visualization">Refined Visualization</a>
+  <ul class="collapse">
+  <li><a href="#original-vs-make-over" id="toc-original-vs-make-over" class="nav-link" data-scroll-target="#original-vs-make-over">Original vs Make Over</a></li>
+  </ul></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Take-Home Exercise 1: Part 2</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">May 8, 2025</p>
+    </div>
+  </div>
+  
+    <div>
+    <div class="quarto-title-meta-heading">Modified</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date-modified">May 11, 2025</p>
+    </div>
+  </div>
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="peer-review" class="level1">
+<h1>Peer Review</h1>
+<p>For this peer review, I will examine the data visualisation provided by my <a href="https://isss608vaarajesh01.netlify.app/takehomeexercises/take_homeexercise1/take_homeexercise1">classmate</a>. I will highlight three effective design principles employed in the submission as well as three areas that would benefit from further refinement. With reference to these comments, I will produce a revised version of the visualisation that incorporates the suggested enhancements.</p>
+<p>We load the following R packages using the <code>pacman::p_load()</code> function:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>pacman<span class="sc">::</span><span class="fu">p_load</span>(ggiraph,patchwork, DT, tidyverse,ggrepel,ggthemes,hrbrthemes,scales)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>The code chunk below imports respopagesex2024.csv into R environment by using <a href="https://readr.tidyverse.org/reference/read_delim.html"><em>read_csv()</em></a> function of <a href="https://readr.tidyverse.org/"><strong>readr</strong></a> package.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>respopagesex2024 <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"data/respopagesex2024.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="original-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="original-visualization">Original Visualization</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-1-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-1" role="tab" aria-controls="tabset-1-1" aria-selected="true">The Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-1-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-1-2" role="tab" aria-controls="tabset-1-2" aria-selected="false">The Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-1-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="Take-Home_Ex01B_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-1-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>pyramid_data <span class="ot">&lt;-</span> respopagesex2024 <span class="sc">%&gt;%</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Age, Sex) <span class="sc">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pop =</span> <span class="fu">sum</span>(Pop), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Pop =</span> <span class="fu">ifelse</span>(Sex <span class="sc">==</span> <span class="st">"Males"</span>, <span class="sc">-</span>Pop, Pop))</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(pyramid_data, <span class="fu">aes</span>(<span class="at">x =</span> Age, <span class="at">y =</span> Pop, <span class="at">fill =</span> Sex)) <span class="sc">+</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">stat =</span> <span class="st">"identity"</span>) <span class="sc">+</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels =</span> abs) <span class="sc">+</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Singapore Population Pyramid (2024)"</span>,</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">x =</span> <span class="st">"Age"</span>, <span class="at">y =</span> <span class="st">"Population"</span>,</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">"Sex"</span>) <span class="sc">+</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<p><img src="images/clipboard-891094182.png" class="img-fluid"></p>
+<section id="quadrant" class="level3">
+<h3 class="anchored" data-anchor-id="quadrant">Quadrant</h3>
+<p>The original visualisation belongs in Quadrant IV because, although its dual colour palette and minimalist design deliver strong visual appeal, the axis is rendered unreadable by the overcrowded age labels and the lack of numeric annotations means the exact counts cannot be determined.</p>
+</section>
+<section id="good-points" class="level3">
+<h3 class="anchored" data-anchor-id="good-points">Good Points</h3>
+<ul>
+<li><p>The use of a distinct colour for each sex allows the viewer to tell male and female distributions apart immediately.</p></li>
+<li><p>Mirroring the bars around a central axis correctly emphasises the symmetry of a population pyramid and supports side-by-side comparison.</p></li>
+<li><p>A minimal grid and lack of decorative elements keep the focus on the data and lend the graphic a clean, professional appearance.</p></li>
+</ul>
+</section>
+<section id="critiques" class="level3">
+<h3 class="anchored" data-anchor-id="critiques"><strong>Critiques</strong></h3>
+<ul>
+<li><p>Printing every single-year age label in a small font creates clutter and makes it hard to pick out particular groups, grouping into five- or ten-year bands would improve readability.</p></li>
+<li><p>By showing annual counts rather than cohort aggregates, the pyramid’s outline becomes jagged, emphasising minor fluctuations instead of revealing the overall demographic shape.</p></li>
+<li><p>The plot relies solely on gridlines for reading counts, with no data labels or annotations on the bars themselves. This forces viewers to estimate values mentally rather than see them at a glance.</p></li>
+</ul>
+</section>
+</section>
+<section id="refined-visualization" class="level2">
+<h2 class="anchored" data-anchor-id="refined-visualization">Refined Visualization</h2>
+<div class="tabset-margin-container"></div><div class="panel-tabset">
+<ul class="nav nav-tabs" role="tablist"><li class="nav-item" role="presentation"><a class="nav-link active" id="tabset-2-1-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-1" role="tab" aria-controls="tabset-2-1" aria-selected="true">The Plot</a></li><li class="nav-item" role="presentation"><a class="nav-link" id="tabset-2-2-tab" data-bs-toggle="tab" data-bs-target="#tabset-2-2" role="tab" aria-controls="tabset-2-2" aria-selected="false">The Code</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1" class="tab-pane active" role="tabpanel" aria-labelledby="tabset-2-1-tab">
+<div class="cell">
+<div class="cell-output-display">
+<div class="girafe html-widget html-fill-item" id="htmlwidget-4ccaded92180c8bb8aa8" style="width:100%;height:464px;"></div>
+<script type="application/json" data-for="htmlwidget-4ccaded92180c8bb8aa8">{"x":{"html":"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' class='ggiraph-svg' role='graphics-document' id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70' viewBox='0 0 576 432'>\n <defs id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_defs'>\n  <clipPath id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_c1'>\n   <rect x='0' y='0' width='576' height='432'/>\n  <\/clipPath>\n  <clipPath id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_c2'>\n   <rect x='67.37' y='23.18' width='424.73' height='365.12'/>\n  <\/clipPath>\n <\/defs>\n <g id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_rootg' class='ggiraph-svg-rootg'>\n  <g clip-path='url(#svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_c1)'>\n   <rect x='0' y='0' width='576' height='432' fill='#FFFFFF' fill-opacity='1' stroke='#FFFFFF' stroke-opacity='1' stroke-width='0.75' stroke-linejoin='round' stroke-linecap='round' class='ggiraph-svg-bg'/>\n  <\/g>\n  <g clip-path='url(#svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_c2)'>\n   <polyline points='120.47,388.30 120.47,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='226.65,388.30 226.65,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='332.83,388.30 332.83,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='439.01,388.30 439.01,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='0.53' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,376.89 492.10,376.89' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,357.87 492.10,357.87' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,338.86 492.10,338.86' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,319.84 492.10,319.84' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,300.82 492.10,300.82' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,281.81 492.10,281.81' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,262.79 492.10,262.79' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,243.77 492.10,243.77' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,224.76 492.10,224.76' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,205.74 492.10,205.74' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,186.72 492.10,186.72' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,167.70 492.10,167.70' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,148.69 492.10,148.69' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,129.67 492.10,129.67' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,110.65 492.10,110.65' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,91.64 492.10,91.64' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,72.62 492.10,72.62' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,53.60 492.10,53.60' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,34.59 492.10,34.59' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='67.37,388.30 67.37,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='173.56,388.30 173.56,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='279.74,388.30 279.74,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='385.92,388.30 385.92,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <polyline points='492.10,388.30 492.10,23.18' fill='none' stroke='#EBEBEB' stroke-opacity='1' stroke-width='1.07' stroke-linejoin='round' stroke-linecap='butt'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e1' x='279.74' y='369.28' width='44.36' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;0 to 4: 83,550' data-id='Females 0 to 4'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e2' x='233.1' y='369.28' width='46.64' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;0 to 4: 87,850' data-id='Males 0 to 4'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e3' x='279.74' y='350.27' width='52.61' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;5 to 9: 99,100' data-id='Females 5 to 9'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e4' x='224.73' y='350.27' width='55.01' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;5 to 9: 103,620' data-id='Males 5 to 9'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e5' x='279.74' y='331.25' width='53.35' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;10 to 14: 100,490' data-id='Females 10 to 14'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e6' x='224.1' y='331.25' width='55.63' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;10 to 14: 104,790' data-id='Males 10 to 14'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e7' x='279.74' y='312.23' width='55.3' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;15 to 19: 104,160' data-id='Females 15 to 19'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e8' x='222.58' y='312.23' width='57.16' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;15 to 19: 107,670' data-id='Males 15 to 19'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e9' x='279.74' y='293.22' width='58.7' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;20 to 24: 110,570' data-id='Females 20 to 24'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e10' x='218.76' y='293.22' width='60.98' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;20 to 24: 114,860' data-id='Males 20 to 24'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e11' x='279.74' y='274.2' width='71.67' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;25 to 29: 134,990' data-id='Females 25 to 29'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e12' x='207.93' y='274.2' width='71.81' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;25 to 29: 135,250' data-id='Males 25 to 29'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e13' x='279.74' y='255.18' width='87.93' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;30 to 34: 165,620' data-id='Females 30 to 34'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e14' x='197.11' y='255.18' width='82.63' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;30 to 34: 155,630' data-id='Males 30 to 34'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e15' x='279.74' y='236.17' width='88.21' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;35 to 39: 166,150' data-id='Females 35 to 39'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e16' x='200.45' y='236.17' width='79.29' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;35 to 39: 149,340' data-id='Males 35 to 39'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e17' x='279.74' y='217.15' width='87.13' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;40 to 44: 164,120' data-id='Females 40 to 44'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e18' x='201.89' y='217.15' width='77.85' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;40 to 44: 146,630' data-id='Males 40 to 44'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e19' x='279.74' y='198.13' width='83.76' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;45 to 49: 157,770' data-id='Females 45 to 49'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e20' x='203.21' y='198.13' width='76.53' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;45 to 49: 144,140' data-id='Males 45 to 49'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e21' x='279.74' y='179.11' width='84.25' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;50 to 54: 158,690' data-id='Females 50 to 54'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e22' x='200.5' y='179.11' width='79.24' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;50 to 54: 149,260' data-id='Males 50 to 54'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e23' x='279.74' y='160.1' width='79.62' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;55 to 59: 149,970' data-id='Females 55 to 59'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e24' x='202.71' y='160.1' width='77.02' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;55 to 59: 145,080' data-id='Males 55 to 59'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e25' x='279.74' y='141.08' width='79.51' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;60 to 64: 149,770' data-id='Females 60 to 64'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e26' x='201.38' y='141.08' width='78.36' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;60 to 64: 147,600' data-id='Males 60 to 64'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e27' x='279.74' y='122.06' width='72.28' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;65 to 69: 136,150' data-id='Females 65 to 69'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e28' x='210.43' y='122.06' width='69.31' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;65 to 69: 130,550' data-id='Males 65 to 69'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e29' x='279.74' y='103.05' width='57.12' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;70 to 74: 107,590' data-id='Females 70 to 74'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e30' x='226.89' y='103.05' width='52.85' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;70 to 74: 99,540' data-id='Males 70 to 74'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e31' x='279.74' y='84.03' width='38.93' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;75 to 79: 73,330' data-id='Females 75 to 79'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e32' x='246.78' y='84.03' width='32.96' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;75 to 79: 62,080' data-id='Males 75 to 79'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e33' x='279.74' y='65.01' width='24.05' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;80 to 84: 45,290' data-id='Females 80 to 84'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e34' x='262.3' y='65.01' width='17.44' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;80 to 84: 32,840' data-id='Males 80 to 84'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e35' x='279.74' y='46' width='14.45' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;85 to 89: 27,210' data-id='Females 85 to 89'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e36' x='270.72' y='46' width='9.02' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;85 to 89: 16,990' data-id='Males 85 to 89'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e37' x='279.74' y='26.98' width='9.31' height='15.21' fill='#F8766D' fill-opacity='1' stroke='none' title='Females&amp;lt;br/&amp;gt;90 plus: 17,530' data-id='Females 90 plus'/>\n   <rect id='svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_e38' x='275.62' y='26.98' width='4.12' height='15.21' fill='#00BFC4' fill-opacity='1' stroke='none' title='Males&amp;lt;br/&amp;gt;90 plus: 7,760' data-id='Males 90 plus'/>\n  <\/g>\n  <g clip-path='url(#svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70_c1)'>\n   <text x='40.41' y='380.04' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>0 to 4<\/text>\n   <text x='40.41' y='361.02' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>5 to 9<\/text>\n   <text x='30.62' y='342.01' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>10 to 14<\/text>\n   <text x='30.62' y='322.99' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>15 to 19<\/text>\n   <text x='30.62' y='303.97' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>20 to 24<\/text>\n   <text x='30.62' y='284.96' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>25 to 29<\/text>\n   <text x='30.62' y='265.94' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>30 to 34<\/text>\n   <text x='30.62' y='246.92' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>35 to 39<\/text>\n   <text x='30.62' y='227.91' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>40 to 44<\/text>\n   <text x='30.62' y='208.89' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>45 to 49<\/text>\n   <text x='30.62' y='189.87' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>50 to 54<\/text>\n   <text x='30.62' y='170.85' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>55 to 59<\/text>\n   <text x='30.62' y='151.84' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>60 to 64<\/text>\n   <text x='30.62' y='132.82' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>65 to 69<\/text>\n   <text x='30.62' y='113.8' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>70 to 74<\/text>\n   <text x='30.62' y='94.79' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>75 to 79<\/text>\n   <text x='30.62' y='75.77' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>80 to 84<\/text>\n   <text x='30.62' y='56.75' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>85 to 89<\/text>\n   <text x='34.06' y='37.74' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>90 plus<\/text>\n   <text x='51.46' y='399.53' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>400,000<\/text>\n   <text x='157.64' y='399.53' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>200,000<\/text>\n   <text x='277.29' y='399.53' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>0<\/text>\n   <text x='370.01' y='399.53' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>200,000<\/text>\n   <text x='476.19' y='399.53' font-size='6.6pt' font-family='Arial' fill='#4D4D4D' fill-opacity='1'>400,000<\/text>\n   <text x='228.06' y='424.2' font-size='8.25pt' font-family='Arial'>Number of Residents<\/text>\n   <text transform='translate(13.36,232.35) rotate(-90.00)' font-size='8.25pt' font-family='Arial'>Age Group<\/text>\n   <text x='508.54' y='189.66' font-size='8.25pt' font-family='Arial'>Sex<\/text>\n   <rect x='509.25' y='197' width='15.86' height='15.86' fill='#F8766D' fill-opacity='1' stroke='none'/>\n   <rect x='509.25' y='214.28' width='15.86' height='15.86' fill='#00BFC4' fill-opacity='1' stroke='none'/>\n   <text x='531.3' y='208.09' font-size='6.6pt' font-family='Arial'>Females<\/text>\n   <text x='531.3' y='225.37' font-size='6.6pt' font-family='Arial'>Males<\/text>\n   <text x='67.37' y='14.93' font-size='9.9pt' font-family='Arial'>Singapore Population Pyramid by 5-Year Age Bands (2024)<\/text>\n  <\/g>\n <\/g>\n<\/svg>","js":null,"uid":"svg_6c5f1c33_2cab_4b79_bc22_623bb3372f70","ratio":1.333333333333333,"settings":{"tooltip":{"css":".tooltip_SVGID_ { padding:5px;background:black;color:white;border-radius:2px;text-align:left; ; position:absolute;pointer-events:none;z-index:999;}","placement":"doc","opacity":0.9,"offx":10,"offy":10,"use_cursor_pos":true,"use_fill":false,"use_stroke":false,"delay_over":200,"delay_out":500},"hover":{"css":".hover_data_SVGID_ { opacity:1;fill-opacity:1; }","reactive":false,"nearest_distance":null},"hover_inv":{"css":".hover_inv_SVGID_ { opacity:0.2; }"},"hover_key":{"css":".hover_key_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_key_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_key_SVGID_ { fill:orange;stroke:black; }\nline.hover_key_SVGID_, polyline.hover_key_SVGID_ { fill:none;stroke:orange; }\nrect.hover_key_SVGID_, polygon.hover_key_SVGID_, path.hover_key_SVGID_ { fill:orange;stroke:none; }\nimage.hover_key_SVGID_ { stroke:orange; }","reactive":true},"hover_theme":{"css":".hover_theme_SVGID_ { fill:orange;stroke:black;cursor:pointer; }\ntext.hover_theme_SVGID_ { stroke:none;fill:orange; }\ncircle.hover_theme_SVGID_ { fill:orange;stroke:black; }\nline.hover_theme_SVGID_, polyline.hover_theme_SVGID_ { fill:none;stroke:orange; }\nrect.hover_theme_SVGID_, polygon.hover_theme_SVGID_, path.hover_theme_SVGID_ { fill:orange;stroke:none; }\nimage.hover_theme_SVGID_ { stroke:orange; }","reactive":true},"select":{"css":".select_data_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_data_SVGID_ { stroke:none;fill:red; }\ncircle.select_data_SVGID_ { fill:red;stroke:black; }\nline.select_data_SVGID_, polyline.select_data_SVGID_ { fill:none;stroke:red; }\nrect.select_data_SVGID_, polygon.select_data_SVGID_, path.select_data_SVGID_ { fill:red;stroke:none; }\nimage.select_data_SVGID_ { stroke:red; }","type":"multiple","only_shiny":true,"selected":[]},"select_inv":{"css":""},"select_key":{"css":".select_key_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_key_SVGID_ { stroke:none;fill:red; }\ncircle.select_key_SVGID_ { fill:red;stroke:black; }\nline.select_key_SVGID_, polyline.select_key_SVGID_ { fill:none;stroke:red; }\nrect.select_key_SVGID_, polygon.select_key_SVGID_, path.select_key_SVGID_ { fill:red;stroke:none; }\nimage.select_key_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"select_theme":{"css":".select_theme_SVGID_ { fill:red;stroke:black;cursor:pointer; }\ntext.select_theme_SVGID_ { stroke:none;fill:red; }\ncircle.select_theme_SVGID_ { fill:red;stroke:black; }\nline.select_theme_SVGID_, polyline.select_theme_SVGID_ { fill:none;stroke:red; }\nrect.select_theme_SVGID_, polygon.select_theme_SVGID_, path.select_theme_SVGID_ { fill:red;stroke:none; }\nimage.select_theme_SVGID_ { stroke:red; }","type":"single","only_shiny":true,"selected":[]},"zoom":{"min":1,"max":1,"duration":300},"toolbar":{"position":"topright","pngname":"diagram","tooltips":null,"fixed":false,"hidden":[],"delay_over":200,"delay_out":500},"sizing":{"rescale":true,"width":1}}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="tabset-2-2" class="tab-pane" role="tabpanel" aria-labelledby="tabset-2-2-tab">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>df_5yr <span class="ot">&lt;-</span> respopagesex2024 <span class="sc">%&gt;%</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">AgeNum =</span> <span class="fu">case_when</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>      Age <span class="sc">==</span> <span class="st">"90_and_Over"</span> <span class="sc">~</span> <span class="dv">90</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span>                 <span class="sc">~</span> <span class="fu">as.numeric</span>(Age)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span>  </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">AgeGroup =</span> <span class="fu">cut</span>(</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>      AgeNum,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>      <span class="at">breaks         =</span> <span class="fu">c</span>(<span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">90</span>, <span class="at">by =</span> <span class="dv">5</span>), <span class="cn">Inf</span>),</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>      <span class="at">right          =</span> <span class="cn">FALSE</span>,</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>      <span class="at">include.lowest =</span> <span class="cn">TRUE</span>,</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>      <span class="at">labels         =</span> <span class="fu">c</span>(</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"0 to 4"</span>,   <span class="st">"5 to 9"</span>,   <span class="st">"10 to 14"</span>, <span class="st">"15 to 19"</span>,</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"20 to 24"</span>, <span class="st">"25 to 29"</span>, <span class="st">"30 to 34"</span>, <span class="st">"35 to 39"</span>,</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"40 to 44"</span>, <span class="st">"45 to 49"</span>, <span class="st">"50 to 54"</span>, <span class="st">"55 to 59"</span>,</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"60 to 64"</span>, <span class="st">"65 to 69"</span>, <span class="st">"70 to 74"</span>, <span class="st">"75 to 79"</span>,</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"80 to 84"</span>, <span class="st">"85 to 89"</span>, <span class="st">"90 plus"</span></span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>      )</span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span></span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>  <span class="fu">complete</span>(AgeGroup, <span class="at">Sex =</span> <span class="fu">c</span>(<span class="st">"Males"</span>, <span class="st">"Females"</span>), <span class="at">fill =</span> <span class="fu">list</span>(<span class="at">Pop =</span> <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(AgeGroup, Sex) <span class="sc">%&gt;%</span></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">Pop =</span> <span class="fu">sum</span>(Pop), <span class="at">.groups =</span> <span class="st">"drop"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">Direction =</span> <span class="fu">if_else</span>(Sex <span class="sc">==</span> <span class="st">"Males"</span>, <span class="sc">-</span>Pop, Pop),</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">Tooltip   =</span> <span class="fu">paste0</span>(Sex, <span class="st">"</span><span class="sc">\n</span><span class="st">"</span>, AgeGroup, <span class="st">": "</span>, <span class="fu">comma</span>(Pop)),</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_id   =</span> <span class="fu">paste</span>(Sex, AgeGroup)</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a>  df_5yr,</span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(</span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a>    <span class="at">x       =</span> AgeGroup,</span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">y       =</span> Direction,</span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill    =</span> Sex,</span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">tooltip =</span> Tooltip,</span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">data_id =</span> data_id</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a>) <span class="sc">+</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col_interactive</span>(<span class="at">width =</span> <span class="fl">0.8</span>) <span class="sc">+</span></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>(<span class="at">clip =</span> <span class="st">"on"</span>) <span class="sc">+</span></span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(</span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">breaks =</span> <span class="fu">seq</span>(<span class="sc">-</span><span class="dv">400000</span>, <span class="dv">400000</span>, <span class="at">by =</span> <span class="dv">200000</span>),</span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>    <span class="at">labels =</span> <span class="sc">~</span> <span class="fu">comma</span>(<span class="fu">abs</span>(.x)),</span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>    <span class="at">limits =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">400000</span>, <span class="dv">400000</span>),</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>    <span class="at">expand =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">0</span>)</span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_x_discrete</span>(<span class="at">drop =</span> <span class="cn">FALSE</span>) <span class="sc">+</span></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Females"</span> <span class="ot">=</span> <span class="st">"#F8766D"</span>, <span class="st">"Males"</span> <span class="ot">=</span> <span class="st">"#00BFC4"</span>)) <span class="sc">+</span></span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Singapore Population Pyramid by 5-Year Age Bands (2024)"</span>,</span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>    <span class="at">x     =</span> <span class="st">"Age Group"</span>,</span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>    <span class="at">y     =</span> <span class="st">"Number of Residents"</span>,</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>    <span class="at">fill  =</span> <span class="st">"Sex"</span></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(</span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.y =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">r =</span> <span class="dv">15</span>)),</span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>    <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">margin =</span> <span class="fu">margin</span>(<span class="at">t =</span> <span class="dv">15</span>))</span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a><span class="fu">girafe</span>(</span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a>  <span class="at">ggobj =</span> p,</span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">width_svg =</span> <span class="dv">8</span>, <span class="at">height_svg =</span> <span class="dv">6</span>,</span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">options =</span> <span class="fu">list</span>(</span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a>    <span class="fu">opts_hover</span>(<span class="at">css     =</span> <span class="st">"opacity:1;fill-opacity:1;"</span>),</span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>    <span class="fu">opts_hover_inv</span>(<span class="at">css =</span> <span class="st">"opacity:0.2;"</span>)</span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+<section id="original-vs-make-over" class="level3">
+<h3 class="anchored" data-anchor-id="original-vs-make-over">Original vs Make Over</h3>
+<p><strong>Interactive Hover Focus</strong></p>
+<ul>
+<li><p><strong>Original</strong>: Static bars offer no tooltip or focus.</p></li>
+<li><p><strong>Revised</strong>: Hovering highlights one bar in full opacity with an on-hover tooltip, greying out all others.</p></li>
+<li><p><strong>Why better</strong>: Interactivity directs attention precisely to the data point of interest and reveals exact counts without overloading the static display.</p></li>
+</ul>
+<p><strong>Age-Group Aggregation</strong></p>
+<ul>
+<li><p><strong>Original</strong>: Every single year from 0 to 90+ is shown, leading to dozens of tiny, overlapping bars and labels.</p></li>
+<li><p><strong>Revised</strong>: Ages are grouped into 5-year bands , cutting the number of categories by more than two-thirds.</p></li>
+<li><p><strong>Why better</strong>: Fewer, broader bands greatly reduce visual clutter and allow the reader to grasp the overall demographic shape at a glance.</p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<ul>
+<li><a href="https://dataremixed.com/2012/05/data-visualization-clarity-or-aesthetics/">Jones, B. (2012, May 28). <em>Data visualization: Clarity or aesthetics?</em> DataRemixed.</a></li>
+<li><a href="https://isss608vaarajesh01.netlify.app/takehomeexercises/take_homeexercise1/take_homeexercise1">Link to Classmate’s Work</a></li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

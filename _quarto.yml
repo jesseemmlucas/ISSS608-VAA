@@ -31,6 +31,8 @@ website:
         menu:
           - text: "Take-Home Exercise 1"
             href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html"
+          - text: "Take-Home Exercise 1 Part 2"
+            href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01B.html"
           
       - text: "In-Class Exercise"
         menu:
@@ -69,6 +71,8 @@ website:
         - section: "Take-Home Exercise"
         - text: "Take-Home Exercise 1"
           href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01.html"
+        - text: "Take-Home Exercise 1 Part 2"
+          href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01B.html"
         
         - section: "In-Class Exercise"
         - text: "In-Class Exercise 2"
