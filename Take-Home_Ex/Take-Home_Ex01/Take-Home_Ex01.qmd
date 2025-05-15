@@ -648,4 +648,3 @@ This exercise focused solely on exploratory visual analysis. To strengthen the f
 # 6. References
 
 [Urban Redevelopment Authority (URA) - Master Plan](https://eservice.ura.gov.sg/maps/?service=MP)
-

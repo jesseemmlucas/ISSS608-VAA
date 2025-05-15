@@ -173,8 +173,10 @@ Code chunk below adds the aesthetic element into the plot.
 ggplot(data=exam_data, 
        aes(x= MATHS))
 ```
+
 ::: {.callout-tip icon="true"}
 #### Note:
+
 -   ggplot includes the x-axis and the axis’s label.
 :::
 
@@ -234,11 +236,13 @@ ggplot(data=exam_data,
 
 ::: {.callout-tip icon="true"}
 #### Be warned:
+
 -   The y scale is not very useful, in fact it is very misleading.
 :::
 
 ::: {.callout-tip icon="true"}
 #### Note:
+
 The code chunk below performs the following two steps:
 
 -   `scale_y_continuous()` is used to turn off the y-axis, and
@@ -269,6 +273,7 @@ ggplot(data=exam_data,
 
 ::: {.callout-tip icon="true"}
 #### Note:
+
 Note that the default bin is **30**.
 :::
 
@@ -304,6 +309,7 @@ ggplot(data=exam_data,
 
 ::: {.callout-tip icon="true"}
 #### Note:
+
 This approach can be used to colour, fill and alpha of the geometric.
 :::
 
@@ -470,6 +476,7 @@ ggplot(data=exam_data,
 
 ::: {.callout-tip icon="true"}
 #### Note:
+
 The default method used is *loess*.
 :::
 
