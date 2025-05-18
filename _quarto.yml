@@ -38,7 +38,8 @@ website:
           
       - text: "In-Class Exercise"
         menu:
-          - text: "Coming Soon"   # Update
+          - text: "In-Class Exercise 1"
+            href: "In-Class_Ex/In-Class_Ex01/MC1.html"
           
     right:
       - href: https://isss608-ay2025.netlify.app/
@@ -79,7 +80,8 @@ website:
           href: "Take-Home_Ex/Take-Home_Ex01/Take-Home_Ex01B.html"
         
         - section: "In-Class Exercise"
-        - text: "In-Class Exercise 2"
+        - text: "In-Class Exercise 1"
+          href: "In-Class_Ex/In-Class_Ex01/MC1.html"
 
 
 format:

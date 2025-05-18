@@ -39,12 +39,10 @@ The code chunk:
 #| code-fold: true
 #| code-summary: "Show the code"
 
-pacman::p_load(
-  igraph, tidygraph, ggraph,
-  visNetwork, lubridate, clock,
-  tidyverse, graphlayouts, concaveman,
-  ggforce
-)
+pacman::p_load(igraph, tidygraph, ggraph, 
+               visNetwork, lubridate, clock,
+               tidyverse, graphlayouts, 
+               concaveman, ggforce,extrafont)
 ```
 
 ## 9.3 The Data
