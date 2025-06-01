@@ -5,13 +5,15 @@ date-modified: "last-modified"
 format:
   html:
     toc: true
-execute: 
+  docx: default
+execute:
   echo: true
   eval: true
   warning: false
   message: false
   freeze: true
 ---
+
 
 # Mini-Challenge 2
 
@@ -444,7 +446,7 @@ This TROUT‐only network reveals the opposite bias from FILAH’s map. Here, th
 glimpse(journalist)
 ```
 
-### Inspecting knowledge graph structure
+### Extracting the edges and nodes tables
 
 ```{r}
 journalist_nodes <- as_tibble(journalist$nodes)
@@ -805,7 +807,6 @@ ggplot(trout_extrema, aes(x = bias_avg, y = name, fill = direction)) +
     plot.title      = element_text(face = "bold", hjust = 0.5),
     legend.position = "bottom"
   )
-
 ```
 
 ### The Code
@@ -856,7 +857,6 @@ ggplot(trout_extrema, aes(x = bias_avg, y = name, fill = direction)) +
     plot.title      = element_text(face = "bold", hjust = 0.5),
     legend.position = "bottom"
   )
-
 ```
 :::
 

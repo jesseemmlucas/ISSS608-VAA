@@ -388,7 +388,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#journalist" id="toc-journalist" class="nav-link" data-scroll-target="#journalist">JOURNALIST</a>
   <ul class="collapse">
   <li><a href="#inspecting-knowledge-graph-structure-2" id="toc-inspecting-knowledge-graph-structure-2" class="nav-link" data-scroll-target="#inspecting-knowledge-graph-structure-2">Inspecting knowledge graph structure</a></li>
-  <li><a href="#inspecting-knowledge-graph-structure-3" id="toc-inspecting-knowledge-graph-structure-3" class="nav-link" data-scroll-target="#inspecting-knowledge-graph-structure-3">Inspecting knowledge graph structure</a></li>
+  <li><a href="#extracting-the-edges-and-nodes-tables-2" id="toc-extracting-the-edges-and-nodes-tables-2" class="nav-link" data-scroll-target="#extracting-the-edges-and-nodes-tables-2">Extracting the edges and nodes tables</a></li>
   <li><a href="#drop-the-industry-field-2" id="toc-drop-the-industry-field-2" class="nav-link" data-scroll-target="#drop-the-industry-field-2">Drop the “Industry” field</a></li>
   <li><a href="#initial-eda-2" id="toc-initial-eda-2" class="nav-link" data-scroll-target="#initial-eda-2">Initial EDA</a></li>
   </ul></li>
@@ -432,7 +432,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion">Conclusion</a></li>
   </ul>
-</nav>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="Take-Home_Ex02.docx"><i class="bi bi-file-word"></i>MS Word</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -1589,8 +1589,8 @@ Insights:
 </div>
 </div>
 </section>
-<section id="inspecting-knowledge-graph-structure-3" class="level3">
-<h3 class="anchored" data-anchor-id="inspecting-knowledge-graph-structure-3">Inspecting knowledge graph structure</h3>
+<section id="extracting-the-edges-and-nodes-tables-2" class="level3">
+<h3 class="anchored" data-anchor-id="extracting-the-edges-and-nodes-tables-2">Extracting the edges and nodes tables</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>journalist_nodes <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(journalist<span class="sc">$</span>nodes)</span>
 <span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>journalist_edges <span class="ot">&lt;-</span> <span class="fu">as_tibble</span>(journalist<span class="sc">$</span>links)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
