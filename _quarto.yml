@@ -134,8 +134,9 @@ website:
 
 format:
   html:
-    theme: materia
-    css: styles.css
-    toc: true
+    theme: materia        # keep the theme
+    toc: true             # keep the table of contents
+    css:
+      - styles.css
 
 editor: visual

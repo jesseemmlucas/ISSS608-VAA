@@ -1,7 +1,14 @@
 /* css styles */
+
 /* give the top-level sidebar section header a background */
 .sidebar-item-text.sidebar-link.text-start {
   background-color: #19a7f7;
-  color: white; 
-  font-weight: 700;  
+  color: white;
+  font-weight: 700;
+}
+
+/* limit long dropdowns so they scroll inside themselves */
+.dropdown-menu {
+  max-height: calc(100vh - 4rem); /* 4 rem ≈ height of blue navbar */
+  overflow-y: auto;
 }
