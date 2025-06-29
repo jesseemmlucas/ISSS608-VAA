@@ -64,6 +64,8 @@ website:
         menu:
           - text: "In-Class Exercise 1"
             href: "In-Class_Ex/In-Class_Ex01/MC1.html"
+          - text: "In-Class Exercise 2"
+            href: "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html"
           
     right:
       - href: https://isss608-ay2025.netlify.app/
@@ -130,6 +132,8 @@ website:
         - section: "In-Class Exercise"
         - text: "In-Class Exercise 1"
           href: "In-Class_Ex/In-Class_Ex01/MC1.html"
+        - text: "In-Class Exercise 2"
+          href: "In-Class_Ex/In-Class_Ex02/In-Class_Ex02.html"
 
 
 format:

@@ -468,7 +468,6 @@ reactable(
 
 ### **Adding bandline**
 
-
 Instead adding reference line, bandline can be added by using the `bandline` argument.
 
 ```{r}
@@ -518,6 +517,3 @@ reactable(
 ```
 
 ## **References**
-
-
-
